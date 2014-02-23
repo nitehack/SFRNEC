@@ -9,21 +9,8 @@
 #use rs232(baud=8929,parity=N,xmit=PIN_C6,rcv=PIN_C7,bits=8, ERRORS)
 
 //Defines
-#define trigger1 PIN_C0
+#define trigger1 PIN_C0//PIN_A1
 #define trigger2 PIN_A7
-
-//---------------------------
-//Receptor IR
-//ID_MANDO                   /*0XFB04*/   |   /*0XBF00*/
-#define  IR_DRCH_A  0x3067    /*0xA45B*/   |   /*0xE51A*/
-#define  IR_DRCH_M  0xD097    /*0xF906*/   |   /*0xE916*/
-#define  IR_DRCH_C  0x9037    /*0xBA45*/   |   /*0xED12*/
-#define  IR_IZDA_A  0xD017    /*0xD728*/   |   /*0xE718*/
-#define  IR_IZDA_M  0x50D7    /*0xF807*/   |   /*0xEB14*/
-#define  IR_IZDA_C  0x1077    /*0xBC43*/   |   /*0xEF10*/
-#define  IR_INIC    0x90B7    /*0x4FB0*/   |   /*0xEE11*/
-#define  IR_PARAR   0x5057    /*0x45BA*/   |   /*0xEA15*/
-//---------------------------
 
 int primero=1;
 int16 dato=0;
@@ -157,14 +144,14 @@ void main()
      if(primero){ //Si ha leido un dato
         //Comprobamos cual es
          switch(dato){
-            case 1 :  orden = 1; break;//A ->
-            case 2 :  orden = 2; break;//M ->
-            case IR_DRCH_C :  orden = 3; break;//C ->
-            case IR_IZDA_A :  orden = 4; break;//A <-
-            case IR_IZDA_M :  orden = 5; break;//M <-
-            case IR_IZDA_C :  orden = 6; break;//C <-
-            case IR_INIC :  orden = 7; break;//I 
-            case IR_PARAR :  orden = 8; break;//P 
+            case 0x3067 :  orden = 1; break;//A ->
+            case 0xD097 :  orden = 2; break;//M ->
+            case 0x9037 :  orden = 3; break;//C ->
+            case 0xD017 :  orden = 4; break;//A <-
+            case 0x50D7 :  orden = 5; break;//M <-
+            case 0x1077 :  orden = 6; break;//C <-
+            case 0x90B7 :  orden = 7; break;//I 
+            case 0x5057 :  orden = 8; break;//P 
             default    :   orden =0;  break;
          }
          
